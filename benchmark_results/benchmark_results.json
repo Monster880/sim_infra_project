@@ -1,0 +1,221 @@
+[
+  {
+    "name": "baseline_fp32",
+    "config": {
+      "device": "cpu",
+      "dtype": "float32",
+      "layer_skip": false,
+      "layer_skip_ratio": 0,
+      "kv_cache": false,
+      "async": false,
+      "quantization": "none"
+    },
+    "latency_ms": {
+      "mean": 353.0063070400138,
+      "median": 347.94458250007665,
+      "p95": 384.39989329990567,
+      "p99": 397.89678406031265,
+      "min": 318.4842740001841,
+      "max": 405.5390230005287,
+      "std": 18.94968487615915
+    },
+    "throughput": {
+      "actions_per_sec": 141.64052880316507,
+      "inferences_per_sec": 2.8328105760633013,
+      "chunks_per_sec": 2.8328105760633013
+    },
+    "memory_mb": 697.41015625,
+    "model_size_mb": 445.14,
+    "optimization_details": {
+      "dtype": "float32"
+    }
+  },
+  {
+    "name": "optimized_fp16",
+    "config": {
+      "device": "cpu",
+      "dtype": "float16",
+      "layer_skip": false,
+      "layer_skip_ratio": 0,
+      "kv_cache": false,
+      "async": false,
+      "quantization": "float16"
+    },
+    "latency_ms": {
+      "mean": 366.48041516002195,
+      "median": 364.0944009998748,
+      "p95": 405.925913749752,
+      "p99": 416.11965440989474,
+      "min": 327.9715680000663,
+      "max": 424.65839000033156,
+      "std": 22.279532942320074
+    },
+    "throughput": {
+      "actions_per_sec": 136.43293865558337,
+      "inferences_per_sec": 2.7286587731116674,
+      "chunks_per_sec": 2.7286587731116674
+    },
+    "memory_mb": 705.7734375,
+    "model_size_mb": 445.14,
+    "optimization_details": {
+      "dtype": "float16 (simulated on CPU)"
+    }
+  },
+  {
+    "name": "optimized_int8",
+    "config": {
+      "device": "cpu",
+      "dtype": "int8",
+      "layer_skip": false,
+      "layer_skip_ratio": 0,
+      "kv_cache": false,
+      "async": false,
+      "quantization": "int8"
+    },
+    "latency_ms": {
+      "mean": 214.61159435993977,
+      "median": 215.7086120000713,
+      "p95": 238.12034005018177,
+      "p99": 248.59020753005098,
+      "min": 186.5222589995028,
+      "max": 252.10703700031445,
+      "std": 16.81094543824009
+    },
+    "throughput": {
+      "actions_per_sec": 232.97902496424115,
+      "inferences_per_sec": 4.659580499284822,
+      "chunks_per_sec": 4.659580499284822
+    },
+    "memory_mb": 1262.82421875,
+    "model_size_mb": 146.51,
+    "optimization_details": {
+      "quantization": "INT8"
+    }
+  },
+  {
+    "name": "layer_skip_50pct",
+    "config": {
+      "device": "cpu",
+      "dtype": "float32",
+      "layer_skip": true,
+      "layer_skip_ratio": 0.5,
+      "kv_cache": false,
+      "async": false,
+      "quantization": "none"
+    },
+    "latency_ms": {
+      "mean": 271.34255563996703,
+      "median": 268.5554304998732,
+      "p95": 302.8163270500499,
+      "p99": 332.44058396968285,
+      "min": 249.7159049999027,
+      "max": 335.01134299967816,
+      "std": 16.076592749049656
+    },
+    "throughput": {
+      "actions_per_sec": 184.26892118736762,
+      "inferences_per_sec": 3.6853784237473524,
+      "chunks_per_sec": 3.6853784237473524
+    },
+    "memory_mb": 1250.91796875,
+    "model_size_mb": 445.14,
+    "optimization_details": {
+      "dtype": "float32",
+      "layer_skip": 12
+    }
+  },
+  {
+    "name": "kv_cache_enabled",
+    "config": {
+      "device": "cpu",
+      "dtype": "float32",
+      "layer_skip": false,
+      "layer_skip_ratio": 0,
+      "kv_cache": true,
+      "async": false,
+      "quantization": "none"
+    },
+    "latency_ms": {
+      "mean": 351.5209138600949,
+      "median": 343.24715599996125,
+      "p95": 408.5210278000886,
+      "p99": 421.99654492033005,
+      "min": 325.4249810006513,
+      "max": 423.3773120004116,
+      "std": 23.787507687950704
+    },
+    "throughput": {
+      "actions_per_sec": 142.2390476030111,
+      "inferences_per_sec": 2.844780952060222,
+      "chunks_per_sec": 2.844780952060222
+    },
+    "memory_mb": 1250.91796875,
+    "model_size_mb": 445.14,
+    "optimization_details": {
+      "dtype": "float32"
+    }
+  },
+  {
+    "name": "async_inference",
+    "config": {
+      "device": "cpu",
+      "dtype": "float32",
+      "layer_skip": false,
+      "layer_skip_ratio": 0,
+      "kv_cache": false,
+      "async": true,
+      "quantization": "none"
+    },
+    "latency_ms": {
+      "mean": 339.47713969999313,
+      "median": 340.76860100003614,
+      "p95": 375.6123760498212,
+      "p99": 387.46108518990695,
+      "min": 301.01249200015445,
+      "max": 391.00029099972744,
+      "std": 19.17665933437129
+    },
+    "throughput": {
+      "actions_per_sec": 147.2853224938404,
+      "inferences_per_sec": 2.945706449876808,
+      "chunks_per_sec": 2.945706449876808
+    },
+    "memory_mb": 1250.91796875,
+    "model_size_mb": 445.14,
+    "optimization_details": {
+      "dtype": "float32"
+    }
+  },
+  {
+    "name": "combined_all_optimizations",
+    "config": {
+      "device": "cpu",
+      "dtype": "float16",
+      "layer_skip": true,
+      "layer_skip_ratio": 0.5,
+      "kv_cache": true,
+      "async": true,
+      "quantization": "float16"
+    },
+    "latency_ms": {
+      "mean": 285.77407732007487,
+      "median": 286.74138700034746,
+      "p95": 307.4617421498715,
+      "p99": 313.7960700495205,
+      "min": 250.53540600038104,
+      "max": 317.32169599945337,
+      "std": 15.258691336542014
+    },
+    "throughput": {
+      "actions_per_sec": 174.96338530383431,
+      "inferences_per_sec": 3.4992677060766866,
+      "chunks_per_sec": 3.4992677060766866
+    },
+    "memory_mb": 1250.91796875,
+    "model_size_mb": 445.14,
+    "optimization_details": {
+      "dtype": "float16 (simulated on CPU)",
+      "layer_skip": 12
+    }
+  }
+]

@@ -1,0 +1,57 @@
+# Benchmark Configuration
+# Run with: python -m src.benchmark.run_benchmark --config configs/benchmark_config.yaml
+
+benchmark:
+  num_warmup: 10
+  num_iterations: 100
+  device: "cpu"  # or "cuda"
+  output_dir: "./benchmark_results"
+
+  # Test configurations
+  test_baseline: true
+  test_fp16: true
+  test_int8: true
+  test_layer_skip: true
+  test_kv_cache: true
+  test_async: true
+  test_combined: true
+
+  # Sweep parameters
+  batch_sizes: [1, 2, 4]
+  image_sizes: [256, 512]
+  action_chunk_sizes: [10, 25, 50]
+
+model:
+  name: "lerobot/smolvla_base"
+  num_visual_tokens: 64
+  action_dim: 7
+  total_layers: 24
+
+optimization:
+  quantization:
+    method: "dynamic"
+    dtype: "float16"
+    per_channel: true
+  
+  layer_skip:
+    max_skip_ratio: 0.5
+    adaptive: true
+    confidence_threshold: 0.8
+  
+  kv_cache:
+    max_entries: 16
+    ttl_steps: 100
+    similarity_threshold: 0.95
+    max_memory_mb: 512
+  
+  pipeline:
+    enable_vision_pipeline: true
+    enable_prefetch: true
+    num_workers: 2
+
+server:
+  host: "0.0.0.0"
+  port: 8080
+  max_batch_size: 8
+  batch_timeout_ms: 10.0
+  max_concurrent_requests: 16
