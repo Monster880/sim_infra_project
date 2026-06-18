@@ -155,10 +155,13 @@ class BenchmarkRunner:
             )
         
         if self.config.test_combined:
+            # On CPU: use INT8 + Layer Skip (FP16 not natively supported on CPU)
+            # On GPU: use FP16 + Layer Skip
+            combined_dtype = "int8" if self.config.device == "cpu" else "float16"
             configs["combined_all_optimizations"] = InferenceConfig(
-                model_config=ModelConfig(device=self.config.device, dtype="float16"),
+                model_config=ModelConfig(device=self.config.device, dtype=combined_dtype),
                 enable_quantization=True,
-                quantization_dtype="float16",
+                quantization_dtype=combined_dtype,
                 enable_layer_skip=True,
                 layer_skip_ratio=0.5,
                 enable_kv_cache=True,

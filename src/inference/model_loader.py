@@ -42,12 +42,13 @@ class ModelLoader:
         # Simulate model loading (in production, use actual LeRobot/HF loading)
         self.model = self._create_smolvla_model()
 
-        # Apply dtype optimization
-        self.model = self._apply_dtype(self.model)
-
-        # Apply layer skipping
+        # Apply layer skipping BEFORE quantization
+        # (quantization changes layer structure, so skip must happen first)
         if self.config.max_layer_skip > 0:
             self.model = self._apply_layer_skip(self.model)
+
+        # Apply dtype optimization / quantization
+        self.model = self._apply_dtype(self.model)
 
         # Apply torch.compile if requested
         if self.config.compile_model and hasattr(torch, 'compile'):
